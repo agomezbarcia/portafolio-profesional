@@ -16,6 +16,7 @@ export default function Header() {
     { href: '#habilidades', label: 'Habilidades' },
     { href: '#proyectos', label: 'Proyectos' },
     { href: '#contacto', label: 'Contacto' },
+    { href: '/CV_Abraham_Gomez_Barcia.pdf', label: 'Currículum', external: true},
   ];
 
   return (
@@ -35,14 +36,15 @@ export default function Header() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
-                  <Link
-                      key={link.href}
-                      href={link.href}
-                      className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-200 relative group"
+                  <a key={link.label}
+                     href={link.href}
+                      // Si tiene la propiedad external, pon target="_blank", si no, nada
+                     target={link.external ? "_blank" : undefined}
+                     rel={link.external ? "noopener noreferrer" : undefined}
+                     className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-200 relative group"
                   >
                     {link.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 group-hover:w-full transition-all duration-300" />
-                  </Link>
+                  </a>
               ))}
 
               {/* Theme Toggle en Desktop */}

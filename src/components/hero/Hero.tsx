@@ -39,19 +39,39 @@ export default function Hero() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col gap-4 pt-4">
+
+              {/* Fila Superior: Proyectos y Contacto */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                    href="#proyectos"
+                    className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:shadow-lg hover:scale-105 text-center"
+                >
+                  Ver mis proyectos
+                </a>
+                <a
+                    href="#contacto"
+                    className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 text-center"
+                >
+                  Contactar conmigo
+                </a>
+              </div>
+
+              {/* Fila Inferior: Currículum */}
               <a
-                  href="#proyectos"
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:shadow-lg hover:scale-105 text-center"
+                  href="/CV_Abraham_Gomez_Barcia.pdf"
+                  download="CV_Abraham_Gomez_Barcia.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-200 text-center group w-full sm:w-auto"
               >
-                Ver mis proyectos
+                <span>Currículum</span>
+                {/* Icono de descarga */}
+                <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
               </a>
-              <a
-                  href="#contacto"
-                  className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 text-center"
-              >
-                Contactar conmigo
-              </a>
+
             </div>
 
             {/* Social Links */}
