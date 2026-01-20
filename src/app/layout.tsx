@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import {PORTFOLIO_DATA} from '@/lib/constants';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -38,53 +39,29 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="scroll-smooth">
+      <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
-
-        {/* Preconectarse a recursos externos */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Manifest para PWA */}
-        <link rel="manifest" href="/manifest.json" />
-
-        {/* Theme color */}
         <meta name="theme-color" content="#3b82f6" />
       </head>
-      <body className={`${inter.className} bg-white text-slate-900 antialiased`}>
-        {/* Skip to main content link (accessibility) */}
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded"
-        >
-          Ir al contenido principal
-        </a>
-
-        {/* Main content */}
-        <div id="main">
-          {children}
-        </div>
-
-        {/* Script para análisis (comentado - descomentar cuando uses Vercel Analytics) */}
-        {/* <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (process.env.NODE_ENV === 'production') {
-                import('@vercel/analytics/react').then(({ Analytics }) => {
-                  // Analytics tracking
-                });
-              }
-            `,
-          }}
-        /> */}
+      <body className={`${inter.className} antialiased`}>
+      <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+      >
+          <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
+              <div id="main">
+                  {children}
+              </div>
+          </div>
+      </ThemeProvider>
       </body>
-    </html>
+      </html>
   );
 }

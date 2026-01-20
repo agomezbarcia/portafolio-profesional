@@ -9,32 +9,32 @@ export default function Hero() {
   return (
       <section
           id="inicio"
-          className="min-h-screen flex items-center justify-center pt-20 pb-12 px-4 bg-linear-to-b from-slate-50 to-white"
+          className="min-h-screen flex items-center justify-center pt-20 pb-12 px-4 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 transition-colors duration-300"
       >
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Contenido izquierdo */}
           <div className="space-y-6 animate-fade-in-up">
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-100 rounded-full w-fit">
-              <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-blue-600">Disponible para proyectos</span>
+            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full w-fit">
+              <span className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Disponible para proyectos</span>
             </div>
 
             {/* Título principal */}
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight">
+            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
               Hola, soy{' '}
-              <span className="bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               {PORTFOLIO_DATA.name}
             </span>
             </h1>
 
             {/* Tagline */}
-            <p className="text-xl md:text-2xl text-slate-600 font-medium">
+            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium">
               {PORTFOLIO_DATA.tagline}
             </p>
 
             {/* Descripción */}
-            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
               {PORTFOLIO_DATA.bio}
             </p>
 
@@ -48,7 +48,7 @@ export default function Hero() {
               </a>
               <a
                   href="#contacto"
-                  className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 text-center"
+                  className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 text-center"
               >
                 Contactar conmigo
               </a>
@@ -56,13 +56,13 @@ export default function Hero() {
 
             {/* Social Links */}
             <div className="flex items-center gap-4 pt-4">
-              <span className="text-sm font-medium text-slate-500">Sígueme:</span>
+              <span className="text-sm font-medium text-slate-500 dark:text-slate-400">Sígueme:</span>
               <div className="flex gap-4">
                 <a
                     href={PORTFOLIO_DATA.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white transition-all duration-200"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-all duration-200"
                     aria-label="GitHub"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -77,7 +77,7 @@ export default function Hero() {
                     href={PORTFOLIO_DATA.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white transition-all duration-200"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-all duration-200"
                     aria-label="LinkedIn"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -86,7 +86,7 @@ export default function Hero() {
                 </a>
                 <a
                     href={`mailto:${PORTFOLIO_DATA.email}`}
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white transition-all duration-200"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-all duration-200"
                     aria-label="Email"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -102,10 +102,10 @@ export default function Hero() {
           <div className="hidden md:flex items-center justify-center">
             <div className="relative w-full h-96">
               {/* Fondo gradient circulante detrás */}
-              <div className="absolute inset-0 bg-linear-to-br from-blue-400 via-purple-400 to-pink-400 rounded-3xl blur-3xl opacity-20 animate-gradient-shift" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-3xl blur-3xl opacity-20 animate-gradient-shift" />
 
               {/* Contenedor de imagen */}
-              <div className="absolute inset-0 bg-linear-to-br from-blue-600 to-purple-600 rounded-3xl flex items-center justify-center overflow-hidden group shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl flex items-center justify-center overflow-hidden group shadow-xl">
 
                 <div className="relative w-full h-full">
                   <Image
@@ -122,15 +122,15 @@ export default function Hero() {
               </div>
 
               {/* Decoración de esquinas */}
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-blue-300 rounded-full opacity-20 blur-xl" />
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-purple-300 rounded-full opacity-20 blur-xl" />
+              <div className="absolute -top-4 -left-4 w-16 h-16 bg-blue-300 dark:bg-blue-500 rounded-full opacity-20 blur-xl" />
+              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-purple-300 dark:bg-purple-500 rounded-full opacity-20 blur-xl" />
             </div>
           </div>
         </div>
 
         {/* Elemento flotante de desplazamiento */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
