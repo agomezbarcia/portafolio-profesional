@@ -9,11 +9,6 @@ export interface Project {
   image: string;
 }
 
-export interface Skill {
-  category: string;
-  items: string[];
-}
-
 export interface SocialLinks {
   github: string;
   linkedin: string;
