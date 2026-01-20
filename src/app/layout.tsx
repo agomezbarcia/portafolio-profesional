@@ -1,14 +1,15 @@
 // src/app/layout.tsx
 
-import type {Metadata} from 'next';
-import {Inter} from 'next/font/google';
-import {Analytics} from '@vercel/analytics/react';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleTagManager } from '@next/third-parties/google';
 import './globals.css';
-import {PORTFOLIO_DATA} from '@/lib/constants';
-import {ThemeProvider} from '@/providers/ThemeProvider';
+import { PORTFOLIO_DATA } from '@/lib/constants';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 
-const inter = Inter({subsets: ['latin']});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: {
@@ -47,19 +48,24 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es" className="scroll-smooth" suppressHydrationWarning>
-            <head>
-                <link rel="icon" href="/favicon.ico"/>
-                <meta name="theme-color" content="#3b82f6"/>
-            </head>
-            <body className={`${inter.className} antialiased`}>
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                    <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
-                        <div id="main">{children}</div>
-                    </div>
-                </ThemeProvider>
-                <Analytics/>
-                <SpeedInsights />
-            </body>
+        <head>
+            <link rel="icon" href="/favicon.ico" />
+            <meta name="theme-color" content="#3b82f6" />
+        </head>
+        <body className={`${inter.className} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
+                <div id="main">{children}</div>
+            </div>
+        </ThemeProvider>
+
+        {/* Herramientas de Vercel */}
+        <Analytics />
+        <SpeedInsights />
+
+        {/* Google Tag Manager */}
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
+        </body>
         </html>
     );
 }
