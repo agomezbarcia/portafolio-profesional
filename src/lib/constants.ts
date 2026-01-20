@@ -40,7 +40,7 @@ export const PROJECTS = [
         description: 'Mi portafolio personal - sitio rápido, moderno y accesible.',
         technologies: ['Next.js 16.1', 'React 19', 'TypeScript 5', 'Tailwind CSS 4', 'Vercel', 'Git/GitHub'],
         link: 'https://github.com/agomezbarcia/portafolio-profesional',
-        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+        image: "/website.png",
     }
 ];
 
