@@ -83,26 +83,6 @@ export default function Skills() {
             </div>
           ))}
         </div>
-
-        {/* Sección adicional: Estadísticas */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { label: 'Proyectos', value: '20+' },
-            { label: 'Clientes', value: '15+' },
-            { label: 'Años Exp.', value: '5+' },
-            { label: 'Tecnologías', value: '25+' },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="text-center p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-            >
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                {stat.value}
-              </div>
-              <p className="text-slate-600 font-medium">{stat.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
