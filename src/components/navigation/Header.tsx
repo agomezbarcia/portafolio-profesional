@@ -4,6 +4,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import {PORTFOLIO_DATA} from '@/lib/constants';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,11 +23,11 @@ export default function Header() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">TN</span>
+            <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+              <Image src="/icon.svg" alt="Logo AG" width={40} height={40} className="rounded-xl shadow-sm object-cover" priority/>
             </div>
-            <span className="text-xl font-bold text-slate-900 hidden sm:block group-hover:text-blue-600 transition-colors">
-              Tu Nombre
+              <span className="text-xl font-bold text-slate-900 hidden sm:block group-hover:text-blue-600 transition-colors">
+              {PORTFOLIO_DATA.name}
             </span>
           </Link>
 

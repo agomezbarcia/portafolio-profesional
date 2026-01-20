@@ -3,12 +3,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import {PORTFOLIO_DATA} from '@/lib/constants';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Abraham Gómez Barcia | Desarrollador Full Stack',
+    default: PORTFOLIO_DATA.name+' | Desarrollador Full Stack',
     template: '%s | Mi Portafolio',
   },
   description:
@@ -19,10 +20,10 @@ export const metadata: Metadata = {
   },
   authors: [
     {
-      name: 'Abraham Gómez Barcia',
+      name: PORTFOLIO_DATA.name,
     },
   ],
-  creator: 'Abraham Gómez Barcia',
+  creator: PORTFOLIO_DATA.name,
   publisher: 'Vercel',
   keywords: [
     'Desarrollador',

@@ -3,11 +3,13 @@
 import Header from '@/components/navigation/Header';
 import Hero from '@/components/hero/Hero';
 import Skills from '@/components/skills/Skills';
+import Experience from '@/components/experience/Experience';
 import Projects from '@/components/projects/Projects';
 import Footer from '@/components/footer/Footer';
+import {PORTFOLIO_DATA} from '@/lib/constants';
 
 export const metadata = {
-  title: 'Abraham Gómez Barcia | Desarrollador Full Stack',
+  title: PORTFOLIO_DATA.name+' | Desarrollador Full Stack',
   description:
     'Portafolio profesional de un desarrollador Full Stack especializado en React, Next.js y diseño moderno.',
   keywords: [
@@ -18,9 +20,9 @@ export const metadata = {
     'TypeScript',
     'Tailwind CSS',
   ],
-  authors: [{ name: 'Abraham Gómez Barcia' }],
+  authors: [{ name: PORTFOLIO_DATA.name }],
   openGraph: {
-    title: 'Abraham Gómez Barcia | Desarrollador Full Stack',
+    title: PORTFOLIO_DATA.name+' | Desarrollador Full Stack',
     description: 'Mi portafolio profesional con proyectos destacados',
     url: 'https://agomezbarcia.vercel.app',
     siteName: 'Portafolio',
@@ -50,6 +52,9 @@ export default function Home() {
         {/* Skills Section */}
         <Skills />
 
+        {/* Experience Section */}
+        <Experience />
+
         {/* Projects Section */}
         <Projects />
 
@@ -69,7 +74,7 @@ export default function Home() {
             {/* Métodos de contacto */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
               <a
-                href="mailto:tu@email.com"
+                href={PORTFOLIO_DATA.email}
                 className="p-6 bg-white border-2 border-slate-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 transition-colors">
@@ -79,14 +84,14 @@ export default function Home() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">Email</h3>
-                <p className="text-slate-600 mb-4">tu@email.com</p>
+                <p className="text-slate-600 mb-4">{PORTFOLIO_DATA.email}</p>
                 <span className="inline-block text-blue-600 font-semibold group-hover:translate-x-1 transition-transform">
                   Enviar mensaje →
                 </span>
               </a>
 
               <a
-                href="https://linkedin.com/in/tu-usuario"
+                href={PORTFOLIO_DATA.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-6 bg-white border-2 border-slate-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all duration-300 group"
@@ -104,7 +109,7 @@ export default function Home() {
               </a>
 
               <a
-                href="https://github.com/tu-usuario"
+                href={PORTFOLIO_DATA.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-6 bg-white border-2 border-slate-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all duration-300 group"
@@ -125,7 +130,7 @@ export default function Home() {
             {/* Botón principal */}
             <div className="pt-4">
               <a
-                href="mailto:tu@email.com"
+                href={PORTFOLIO_DATA.email}
                 className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:shadow-lg hover:scale-105"
               >
                 Comencemos a trabajar
