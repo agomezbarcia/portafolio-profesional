@@ -14,6 +14,7 @@ export default function Header() {
   const navLinks = [
     { href: '#inicio', label: 'Inicio' },
     { href: '#habilidades', label: 'Habilidades' },
+    { href: '#experiencia', label: 'Experiencia' },
     { href: '#proyectos', label: 'Proyectos' },
     { href: '#contacto', label: 'Contacto' },
     { href: '/CV_Abraham_Gomez_Barcia.pdf', label: 'Currículum', external: true},
