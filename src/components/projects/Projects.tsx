@@ -39,7 +39,7 @@ export default function Projects() {
             {PROJECTS.slice(3).map((project) => (
               <a
                 key={project.id}
-                href={project.demoLink || project.link}
+                href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"

@@ -46,16 +46,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             >
               Código
             </a>
-            {project.demoLink && (
-              <a
-                href={project.demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-300"
-              >
-                Demo
-              </a>
-            )}
           </div>
         </div>
 
@@ -103,19 +93,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
-            {project.demoLink && (
-              <a
-                href={project.demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 text-purple-600 hover:text-purple-700 font-semibold group/link"
-              >
-                <span>Ver demo</span>
-                <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            )}
           </div>
         </div>
       </div>

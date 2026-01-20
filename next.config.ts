@@ -18,9 +18,6 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Optimizaciones de compilación
-  swcMinify: true,
-
   // Configuración experimental para mejor rendimiento
   experimental: {
     // Optimización de bundling
@@ -81,12 +78,7 @@ const nextConfig: NextConfig = {
   // Otras optimizaciones
   compress: true,
   productionBrowserSourceMaps: false,
-  poweredByHeader: false,
-
-  // Configuración de eslint
-  eslint: {
-    dirs: ['src'],
-  },
+  poweredByHeader: false
 };
 
 export default nextConfig;

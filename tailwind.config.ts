@@ -132,24 +132,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    // Plugin personalizado para scroll suave
-    function ({ addUtilities }) {
-      const scrollUtilities = {
-        '.scroll-smooth': {
-          scrollBehavior: 'smooth',
-        },
-        '.no-scrollbar': {
-          '-ms-overflow-style': 'none',
-          'scrollbar-width': 'none',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        },
-      };
-      addUtilities(scrollUtilities);
-    },
-  ],
+  plugins: [],
 };
 
 export default config;

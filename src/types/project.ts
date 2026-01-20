@@ -6,7 +6,6 @@ export interface Project {
   description: string;
   technologies: string[];
   link: string;
-  demoLink?: string;
   image: string;
 }
 
