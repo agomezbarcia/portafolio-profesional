@@ -13,7 +13,6 @@ export default function Projects() {
             <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-wider uppercase mb-2 block">
               Portafolio
             </span>
-                        {/* TÍTULO CON DEGRADADO RECUPERADO */}
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
                             Proyectos{' '}
                             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

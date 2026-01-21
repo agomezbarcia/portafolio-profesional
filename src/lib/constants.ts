@@ -92,3 +92,30 @@ export const EXPERIENCE = [
         technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Docker', 'Kubernetes', 'WordPress'],
     },
 ];
+
+export const EDUCATION = [
+    {
+        id: 1,
+        title: 'Sistemas Microinformáticos y Redes',
+        center: 'I.E.S. San Jerónimo',
+        period: '2019 - 2022',
+        status: 'Titulado',
+        description: 'Fundamentos sólidos en hardware, administración de sistemas y redes corporativas.'
+    },
+    {
+        id: 2,
+        title: 'Desarrollo de Aplicaciones Web',
+        center: 'I.E.S. Julio Verne',
+        period: '2022 - 2024',
+        status: 'Titulado',
+        description: 'Formación Full Stack especializada en arquitecturas web, bases de datos y despliegue.'
+    },
+    {
+        id: 3,
+        title: 'Desarrollo de Aplicaciones Multiplataforma',
+        center: 'I.E.S. Julio Verne',
+        period: '2024 - 2025',
+        status: 'Titulado',
+        description: 'Especialización en desarrollo móvil y soluciones multiplataforma modernas.'
+    },
+];

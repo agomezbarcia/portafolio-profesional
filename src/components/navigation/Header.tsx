@@ -13,6 +13,7 @@ export default function Header() {
     { href: '#inicio', label: 'Inicio' },
     { href: '#habilidades', label: 'Habilidades' },
     { href: '#experiencia', label: 'Experiencia' },
+    { href: '#educacion', label: 'Formación' },
     { href: '#proyectos', label: 'Proyectos' },
   ];
 

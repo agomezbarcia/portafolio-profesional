@@ -17,8 +17,6 @@ export default function Hero() {
           {/* Texto */}
           <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-up">
 
-            {/* Se ha eliminado el badge de "Disponible para trabajar" aquí */}
-
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900 dark:text-white">
               Hola, soy{' '}
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">

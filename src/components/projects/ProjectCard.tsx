@@ -12,8 +12,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <article className="group flex flex-col md:flex-row gap-6 md:gap-8 bg-white dark:bg-slate-950 md:items-center">
         {/* Imagen */}
         <div className="w-full md:w-1/2 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 relative aspect-video">
-          {/* Usar <img> normal es válido si la imagen es externa o para simplificar,
-             pero next/image es recomendado si tienes el dominio configurado */}
           <img
               src={project.image}
               alt={project.title}

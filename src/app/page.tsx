@@ -2,6 +2,7 @@ import Header from '@/components/navigation/Header';
 import Hero from '@/components/hero/Hero';
 import Skills from '@/components/skills/Skills';
 import Experience from '@/components/experience/Experience';
+import Education from '@/components/education/Education';
 import Projects from '@/components/projects/Projects';
 import Footer from '@/components/footer/Footer';
 import ContactForm from '@/components/contact/ContactForm';
@@ -21,6 +22,7 @@ export default function Home() {
           <Hero />
           <Skills />
           <Experience />
+          <Education />
           <Projects />
 
           {/* Contact Section */}
