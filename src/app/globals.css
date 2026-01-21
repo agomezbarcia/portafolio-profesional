@@ -1,139 +1,66 @@
 @import "tailwindcss";
-
-/* Vinculamos la configuración para que lea el darkMode: 'class' */
 @config "../../tailwind.config.ts";
 
 @layer base {
   html {
+    scroll-padding-top: 5rem;
     scroll-behavior: smooth;
   }
 
   body {
-    /* El fondo lo maneja el ThemeProvider en layout.tsx */
-    @apply text-slate-900 antialiased;
+    @apply text-slate-900 bg-slate-50 dark:bg-slate-950 antialiased selection:bg-blue-600 selection:text-white;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-  }
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight; }
+  h2 { @apply text-3xl md:text-4xl font-bold tracking-tight; }
+  h3 { @apply text-xl md:text-2xl font-bold; }
 
-  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
-  h2 { @apply text-3xl md:text-4xl lg:text-5xl; }
-  h3 { @apply text-2xl md:text-3xl; }
-  p { @apply leading-relaxed; }
-  a { @apply transition-colors duration-200; }
-
-  code {
-    @apply px-1.5 py-0.5 bg-slate-100 rounded text-slate-800 font-mono text-sm;
-  }
-
-  pre {
-    @apply bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto;
-  }
-
-  button {
-    @apply transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-  }
-
-  input, textarea, select {
-    @apply transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-blue-500;
-  }
-}
-
-@layer components {
-  .transition-all-smooth {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .scroll-smooth {
-    scroll-behavior: smooth;
-  }
-
-  .gradient-bg {
-    /* Usamos la sintaxis estándar compatible */
-    @apply bg-linear-to-br from-slate-900 via-slate-700 to-slate-900;
-  }
-
-  .glass-effect {
-    @apply backdrop-blur-md bg-white/10 border border-white/20;
-  }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-300 dark:bg-slate-700 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400 dark:bg-slate-600; }
 }
 
 @layer utilities {
-  /* --- Animaciones Generales --- */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
+  .glass-nav {
+    @apply bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50;
+  }
+
+  .glass-card {
+    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800;
+  }
+
+  .animate-fade-up { animation: fadeUp 0.5s ease-out forwards; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes gradientShift {
-    0% { background-position: 0 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0 50%; }
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-  }
-
-  .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
-  .animate-slide-in-left { animation: slideInLeft 0.6s ease-out forwards; }
-  .animate-slide-in-right { animation: slideInRight 0.6s ease-out forwards; }
-  .animate-gradient-shift { animation: gradientShift 3s ease infinite; }
-  .animate-float { animation: float 3s ease-in-out infinite; }
-
-  /* --- VIEW TRANSITIONS --- */
-
-  /* Animación de barrido "wipe-down" */
-  @keyframes wipe-down {
-    0% { clip-path: inset(0 0 100% 0); }
-    100% { clip-path: inset(0 0 0 0); }
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 1.2s;
-    animation-fill-mode: both;
-    mix-blend-mode: normal;
-  }
-
-  /* El tema anterior se queda quieta (z-index bajo) */
-  ::view-transition-old(root) {
-    animation: none;
-    z-index: 1;
-  }
-
-  /* El tema nuevo baja como cortina (z-index alto) */
-  ::view-transition-new(root) {
-    z-index: 9999;
-    animation-name: wipe-down;
-    will-change: clip-path;
-    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
   }
 }
 
-/* --- Estilos Globales Extra --- */
+/* --- VIEW TRANSITIONS (GLOBAL) --- */
+@keyframes wipe-down {
+  0% { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
 
-/* Scrollbar personalizada (Webkit) */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #f1f5f9; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 1.2s;
+  animation-fill-mode: both;
+  mix-blend-mode: normal;
+}
 
-/* Scrollbar (Firefox) */
-* { scrollbar-color: #cbd5e1 #f1f5f9; scrollbar-width: thin; }
+/* La pantalla vieja se queda quieta detrás */
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
 
-/* Selección de texto */
-::selection { background-color: #3b82f6; color: white; }
-::-moz-selection { background-color: #3b82f6; color: white; }
+/* La pantalla nueva baja como cortina por delante */
+::view-transition-new(root) {
+  z-index: 9999;
+  animation-name: wipe-down;
+  will-change: clip-path;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}

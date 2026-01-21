@@ -12,8 +12,6 @@ export const PORTFOLIO_DATA = {
     },
 };
 
-// src/lib/constants.ts (o donde tengas tus datos)
-
 export const SKILLS = [
     {
         category: 'Frontend',
@@ -36,9 +34,19 @@ export const SKILLS = [
 export const PROJECTS = [
     {
         id: 1,
-        title: 'Portfolio Website',
-        description: 'Mi portafolio personal - sitio rápido, moderno y accesible.',
-        technologies: ['Next.js 16.1', 'React 19', 'TypeScript 5', 'Tailwind CSS 4', 'Vercel', 'Git/GitHub'],
+        title: 'Portfolio Profesional',
+        description: 'Portafolio personal de alto rendimiento. Cuenta con modo oscuro animado mediante View Transitions, validación de seguridad con Cloudflare Turnstile y gestión de formularios vía Server Actions.',
+        technologies: [
+            'Next.js 16.1',
+            'React 19',
+            'TypeScript 5',
+            'Tailwind CSS 4',
+            'Server Actions',
+            'Cloudflare Turnstile',
+            'View Transitions API',
+            'Vercel',
+            'Git/GitHub'
+        ],
         link: 'https://github.com/agomezbarcia/portafolio-profesional',
         image: "/website.png",
     }

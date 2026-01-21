@@ -1,31 +1,29 @@
 'use client';
 
-import {useRef, useState} from 'react';
-import {sendEmail} from '@/actions/send-email';
-import {useFormStatus} from 'react-dom';
+import { useRef, useState } from 'react';
+import { sendEmail } from '@/actions/send-email';
+import { useFormStatus } from 'react-dom';
 import { Turnstile } from '@marsidev/react-turnstile';
 
-// Componente pequeño para el botón de envío
 function SubmitButton() {
-    const {pending} = useFormStatus();
+    const { pending } = useFormStatus();
 
     return (
         <button
             type="submit"
             disabled={pending}
-            className="w-full px-8 py-4 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm"
         >
             {pending ? (
                 <>
-                    <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
-                    Enviando...
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"/>
+                    <span>Enviando...</span>
                 </>
             ) : (
                 <>
-                    Enviar mensaje
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    <span>Enviar mensaje</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
                 </>
             )}
@@ -40,120 +38,101 @@ export default function ContactForm() {
     const [token, setToken] = useState<string>('');
 
     async function handleSubmit(formData: FormData) {
-        // Validamos que el usuario haya pasado el reto de seguridad
         if (!token) {
             setStatus('error');
-            setErrorMessage('Por favor, completa la verificación de seguridad.');
+            setErrorMessage('Por favor, verifica que eres humano.');
             return;
         }
 
-        // Añadimos el token al FormData para enviarlo al servidor
         formData.append('cf-turnstile-response', token);
-
-        setErrorMessage('');
         const result = await sendEmail(null, formData);
 
         if (result?.error) {
             setStatus('error');
             setErrorMessage(result.error);
-            // Resetear el token si falla
             setToken('');
         } else {
             setStatus('success');
             ref.current?.reset();
-            setToken(''); // Limpiamos el token
+            setToken('');
         }
     }
 
-    return (
-        <div className="w-full max-w-lg mx-auto bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-800">
-
-            {/* Mensaje de Éxito */}
-            {status === 'success' ? (
-                <div className="text-center py-12 animate-fade-in-up">
-                    <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/>
-                        </svg>
-                    </div>
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">¡Mensaje enviado!</h3>
-                    <p className="text-slate-600 dark:text-slate-400 mb-6">
-                        Gracias por contactarme. Te responderé lo antes posible.
-                    </p>
-                    <button
-                        onClick={() => setStatus('idle')}
-                        className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
-                    >
-                        Enviar otro mensaje
-                    </button>
+    // Estado de éxito compacto
+    if (status === 'success') {
+        return (
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-8 text-center animate-fade-up">
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/>
+                    </svg>
                 </div>
-            ) : (
-                /* Formulario */
-                <form ref={ref} action={handleSubmit} className="space-y-6">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                            Nombre
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            required
-                            placeholder="Tu nombre"
-                            className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                        />
-                    </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">¡Mensaje enviado!</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">Te responderé lo antes posible.</p>
+                <button
+                    onClick={() => setStatus('idle')}
+                    className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                    Enviar otro mensaje
+                </button>
+            </div>
+        );
+    }
 
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            placeholder="tu@email.com"
-                            className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                        />
-                    </div>
+    return (
+        <form ref={ref} action={handleSubmit} className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                    <label htmlFor="name" className="text-sm font-medium text-slate-700 dark:text-slate-300">Nombre</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-sm"
+                        placeholder="Tu nombre"
+                    />
+                </div>
+                <div className="space-y-1.5">
+                    <label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-sm"
+                        placeholder="tu@email.com"
+                    />
+                </div>
+            </div>
 
-                    {/* --- Campo mensaje --- */}
-                    <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                            Mensaje
-                        </label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            required
-                            rows={4}
-                            placeholder="¿En qué puedo ayudarte?"
-                            className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
-                        />
-                    </div>
+            <div className="space-y-1.5">
+                <label htmlFor="message" className="text-sm font-medium text-slate-700 dark:text-slate-300">Mensaje</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={4}
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-sm resize-none"
+                    placeholder="¿Cómo puedo ayudarte?"
+                />
+            </div>
 
-                    {/* --- Widget de seguridad --- */}
-                    <div className="flex justify-center">
-                        <Turnstile
-                            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
-                            onSuccess={(token) => setToken(token)}
-                            options={{
-                                theme: 'auto',
-                                language: 'es',
-                            }}
-                        />
-                    </div>
+            <div className="hidden justify-center pt-2 scale-90 origin-center">
+                <Turnstile
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
+                    onSuccess={setToken}
+                    options={{ theme: 'auto', language: 'es' }}
+                />
+            </div>
 
-                    {status === 'error' && (
-                        <div className="p-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm">
-                            {errorMessage}
-                        </div>
-                    )}
-
-                    <SubmitButton />
-                </form>
+            {status === 'error' && (
+                <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm text-center">
+                    {errorMessage}
+                </div>
             )}
-        </div>
+
+            <SubmitButton />
+        </form>
     );
 }

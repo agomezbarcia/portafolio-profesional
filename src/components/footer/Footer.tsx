@@ -1,5 +1,3 @@
-// src/components/footer/Footer.tsx
-
 'use client';
 
 import { PORTFOLIO_DATA } from '@/lib/constants';
@@ -8,142 +6,35 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-      <footer className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 py-12 px-4 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto">
-          {/* Contenido principal */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            {/* Sección 1: Info */}
-            <div className="space-y-4">
-              <h3 className="text-slate-900 dark:text-white font-bold text-lg">
-                {PORTFOLIO_DATA.name}
-              </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                Desarrollador web especializado en tecnologías modernas y mejores prácticas de desarrollo.
-              </p>
-              <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                📍 {PORTFOLIO_DATA.location}
-              </p>
-            </div>
+      <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-sm">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
 
-            {/* Sección 2: Links rápidos */}
-            <div>
-              <h4 className="text-slate-900 dark:text-white font-semibold mb-4">Enlaces</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#inicio" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                    Inicio
-                  </a>
-                </li>
-                <li>
-                  <a href="#habilidades" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                    Habilidades
-                  </a>
-                </li>
-                <li>
-                  <a href="#proyectos" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                    Proyectos
-                  </a>
-                </li>
-                <li>
-                  <a href="#contacto" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                    Contacto
-                  </a>
-                </li>
-              </ul>
-            </div>
+          {/* Marca y Copyright */}
+          <div className="space-y-2">
+          <span className="font-bold text-lg text-slate-900 dark:text-white block">
+            {PORTFOLIO_DATA.name}
+          </span>
+            <p className="text-slate-500 dark:text-slate-400">
+              &copy; {currentYear}. Construido con Next.js & Tailwind.
+            </p>
+          </div>
 
-            {/* Sección 3: Redes sociales */}
-            <div>
-              <h4 className="text-slate-900 dark:text-white font-semibold mb-4">Social</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a
-                      href={PORTFOLIO_DATA.social.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                      href={PORTFOLIO_DATA.social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                      href={`mailto:${PORTFOLIO_DATA.email}`}
-                      className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Email
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Sección 4: CTA */}
-            <div>
-              <h4 className="text-slate-900 dark:text-white font-semibold mb-4">¿Quieres conectar?</h4>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                Estoy disponible para nuevos proyectos y colaboraciones.
-              </p>
-              <a
-                  href={`mailto:${PORTFOLIO_DATA.email}`}
-                  className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors text-sm shadow-sm hover:shadow-md"
-              >
-                Enviar email
-              </a>
+          {/* Links Rápidos - Centrados en desktop */}
+          <div className="flex flex-col md:items-center space-y-2">
+            <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Navegación</h4>
+            <div className="flex gap-4 text-slate-600 dark:text-slate-400">
+              <a href="#inicio" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Inicio</a>
+              <a href="#proyectos" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Proyectos</a>
+              <a href="#contacto" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contacto</a>
             </div>
           </div>
 
-          {/* Separador */}
-          <div className="h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-800 to-transparent mb-8" />
-
-          {/* Bottom */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-slate-500 dark:text-slate-500">
-              © {currentYear} {PORTFOLIO_DATA.name}. Todos los derechos reservados.
-            </p>
-
-            {/* Links legales */}
-            <div className="flex gap-6 text-sm text-slate-500 dark:text-slate-500">
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                Privacidad
-              </a>
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                Términos
-              </a>
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                Sitemap
-              </a>
-            </div>
-
-            {/* Built with */}
-            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-500">
-              <span>Built with</span>
-              <a
-                  href="https://nextjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
-              >
-                Next.js
-              </a>
-              <span>&</span>
-              <a
-                  href="https://tailwindcss.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
-              >
-                Tailwind
-              </a>
+          {/* Social - Alineado derecha en desktop */}
+          <div className="flex flex-col md:items-end space-y-2">
+            <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Social</h4>
+            <div className="flex gap-4">
+              <a href={PORTFOLIO_DATA.social.github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">GitHub</a>
+              <a href={PORTFOLIO_DATA.social.linkedin} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">LinkedIn</a>
             </div>
           </div>
         </div>

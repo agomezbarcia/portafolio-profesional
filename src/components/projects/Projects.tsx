@@ -1,99 +1,42 @@
-// src/components/projects/Projects.tsx
-
 'use client';
 
-import {PROJECTS} from '@/lib/constants';
+import { PROJECTS } from '@/lib/constants';
+import { PORTFOLIO_DATA } from '@/lib/constants';
 import ProjectCard from './ProjectCard';
 
 export default function Projects() {
     return (
-        <section id="proyectos" className="py-20 px-4 bg-white dark:bg-slate-950 transition-colors duration-300">
+        <section id="proyectos" className="py-16 px-4 bg-white dark:bg-slate-950">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16 space-y-4">
-          <span className="inline-block text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-4 py-2 rounded-full">
-            PORTAFOLIO
-          </span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
-                        Proyectos{' '}
-                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            Destacados
-                        </span>
-                    </h2>
-                    <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                        Una selección de mis proyectos más recientes y significativos. Cada uno
-                        representa un desafío diferente y soluciones innovadoras.
-                    </p>
+                <div className="mb-12 text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-4">
+                    <div>
+            <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-wider uppercase mb-2 block">
+              Portafolio
+            </span>
+                        {/* TÍTULO CON DEGRADADO RECUPERADO */}
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+                            Proyectos{' '}
+                            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Destacados
+              </span>
+                        </h2>
+                    </div>
+                    <a href={PORTFOLIO_DATA.social.github} target="_blank" className="text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors">
+                        Ver todo en GitHub &rarr;
+                    </a>
                 </div>
 
-                {/* Projects Grid */}
-                <div className="space-y-16">
-                    {PROJECTS.slice(0, 3).map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index}/>
+                <div className="grid grid-cols-1 gap-12">
+                    {PROJECTS.map((project, index) => (
+                        <ProjectCard key={project.id} project={project} index={index} />
                     ))}
                 </div>
 
-                {/* Grid de proyectos adicionales (más compacta) */}
-                {PROJECTS.length > 3 && (
-                    <div className="mt-20 pt-20 border-t border-slate-200 dark:border-slate-800">
-                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
-                            Más proyectos
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {PROJECTS.slice(3).map((project) => (
-                                <a
-                                    key={project.id}
-                                    href={project.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group"
-                                >
-                                    <div className="relative h-48 rounded-xl overflow-hidden shadow-md mb-4 bg-slate-100 dark:bg-slate-800">
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                        <div
-                                            className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300"/>
-                                    </div>
-                                    <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                        {project.title}
-                                    </h4>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">
-                                        {project.description}
-                                    </p>
-                                    <div className="flex flex-wrap gap-2 mb-3">
-                                        {project.technologies.slice(0, 2).map((tech, index) => (
-                                            <span key={index} className="text-xs font-medium text-blue-600 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded">
-                                                {tech}
-                                            </span>))}
-                                        {project.technologies.length > 2 && (
-                                            <span className="text-xs font-medium text-slate-500 dark:text-slate-500">
-                                                +{project.technologies.length - 2}
-                                             </span>)}
-                                    </div>
-                                    <div
-                                        className="inline-flex items-center space-x-1 text-blue-600 dark:text-blue-400 font-semibold text-sm group-hover:space-x-2 transition-all">
-                                        <span>Ver proyecto</span>
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                  d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                                        </svg>
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* CTA Button */}
-                <div className="text-center mt-20">
-                    <a
-                        href="#contacto"
-                        className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:shadow-lg hover:scale-105"
-                    >
-                        ¿Tienes un proyecto en mente? Hablemos
+                <div className="mt-16 p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-center">
+                    <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">¿Tienes una idea en mente?</h3>
+                    <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">Estoy disponible para colaborar en nuevos desarrollos.</p>
+                    <a href="#contacto" className="inline-block px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-lg hover:opacity-90 transition-opacity">
+                        Hablemos
                     </a>
                 </div>
             </div>

@@ -1,8 +1,5 @@
-// src/components/projects/ProjectCard.tsx
-
 'use client';
 
-import Image from 'next/image';
 import { type Project } from '@/types/project';
 
 interface ProjectCardProps {
@@ -10,97 +7,56 @@ interface ProjectCardProps {
   index: number;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
-  const isEven = index % 2 === 0;
-
+export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-      <div className="group">
-        <div
-            className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${
-                isEven ? 'md:grid-cols-2' : 'md:grid-cols-2 md:auto-cols-reverse'
-            }`}
-        >
-          {/* Imagen del proyecto */}
-          <div
-              className={`relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-none ${
-                  !isEven && 'md:order-2'
-              }`}
-          >
-            {/* Fondo gradient mientras carga */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 opacity-10" />
-
-            {/* Imagen */}
-            <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-
-            {/* Overlay con links */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center gap-4">
-              <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-2 bg-white text-slate-900 rounded-lg font-semibold opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-300"
-              >
-                Código
-              </a>
-            </div>
-          </div>
-
-          {/* Contenido del proyecto */}
-          <div className={`space-y-4 ${!isEven && 'md:order-1'}`}>
-            {/* Badge */}
-            <div className="inline-block">
-            <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full">
-              Proyecto #{project.id}
-            </span>
-            </div>
-
-            {/* Título */}
-            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-              {project.title}
-            </h3>
-
-            {/* Descripción */}
-            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              {project.description}
-            </p>
-
-            {/* Tecnologías */}
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, techIndex) => (
-                  <span
-                      key={techIndex}
-                      className="px-3 py-1 text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg border border-slate-200 dark:border-slate-700 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 group-hover:border-blue-300 dark:group-hover:border-blue-700 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-all duration-300"
-                  >
-                {tech}
-              </span>
-              ))}
-            </div>
-
-            {/* Links */}
-            <div className="flex gap-4 pt-4">
-              <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold group/link"
-              >
-                <span>Ver código</span>
-                <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </div>
-          </div>
+      <article className="group flex flex-col md:flex-row gap-6 md:gap-8 bg-white dark:bg-slate-950 md:items-center">
+        {/* Imagen */}
+        <div className="w-full md:w-1/2 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 relative aspect-video">
+          {/* Usar <img> normal es válido si la imagen es externa o para simplificar,
+             pero next/image es recomendado si tienes el dominio configurado */}
+          <img
+              src={project.image}
+              alt={project.title}
+              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-xl" />
         </div>
 
-        {/* Separador */}
-        {index < 2 && (
-            <div className="my-16 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent" />
-        )}
-      </div>
+        {/* Contenido */}
+        <div className="w-full md:w-1/2 space-y-4">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {project.title}
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+                <span
+                    key={tech}
+                    className="text-xs font-medium px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-md"
+                >
+              {tech}
+            </span>
+            ))}
+          </div>
+
+          <div className="pt-2 flex items-center gap-4">
+            {project.link && (
+                <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  Ver Proyecto
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+            )}
+          </div>
+        </div>
+      </article>
   );
 }
