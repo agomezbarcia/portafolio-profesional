@@ -1,6 +1,6 @@
 'use client';
 
-import { type Project } from '@/types/project';
+import { Project } from '@/types';
 
 interface ProjectCardProps {
   project: Project;

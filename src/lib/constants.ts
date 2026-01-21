@@ -1,6 +1,14 @@
 // src/lib/constants.ts
 
-export const PORTFOLIO_DATA = {
+import {
+    PortfolioData,
+    SkillCategory,
+    Project,
+    ExperienceItem,
+    EducationItem
+} from '@/types';
+
+export const PORTFOLIO_DATA: PortfolioData = {
     name: 'Abraham Gómez Barcia',
     tagline: 'Full Stack Developer',
     bio: 'Apasionado por crear experiencias web modernas, rápidas y accesibles. Especializado en Full Stack.',
@@ -12,7 +20,7 @@ export const PORTFOLIO_DATA = {
     },
 };
 
-export const SKILLS = [
+export const SKILLS: SkillCategory[] = [
     {
         category: 'Frontend',
         items: ['HTML5', 'CSS3 / Bootstrap', 'JavaScript', 'TypeScript', 'Vue', 'Angular / Ionic', 'React', 'Next.js', 'Tailwind CSS'],
@@ -31,7 +39,7 @@ export const SKILLS = [
     }
 ];
 
-export const PROJECTS = [
+export const PROJECTS: Project[] = [
     {
         id: 1,
         title: 'Portfolio Profesional',
@@ -52,7 +60,7 @@ export const PROJECTS = [
     }
 ];
 
-export const EXPERIENCE = [
+export const EXPERIENCE: ExperienceItem[] = [
     {
         id: 1,
         company: 'Moodel SRL',
@@ -93,7 +101,7 @@ export const EXPERIENCE = [
     },
 ];
 
-export const EDUCATION = [
+export const EDUCATION: EducationItem[] = [
     {
         id: 1,
         title: 'Sistemas Microinformáticos y Redes',
