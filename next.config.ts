@@ -40,6 +40,7 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         headers: [
+          // --- Headers Básicos ---
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
@@ -61,6 +62,7 @@ const nextConfig: NextConfig = {
             value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
           },
 
+          // --- Headers Avanzados (CSP & COOP) ---
           {
             // Fuerza HTTPS y evita ataques de downgrade
             key: "Strict-Transport-Security",
@@ -71,7 +73,6 @@ const nextConfig: NextConfig = {
             value: "same-origin",
           },
           {
-            // Define qué scripts y conexiones son válidos (Cloudflare, Vercel, etc.)
             key: "Content-Security-Policy",
             value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
           },
@@ -96,20 +97,41 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Definición de la Política de Seguridad de Contenido (CSP)
-// Autorizo explícitamente a Cloudflare Turnstile y Vercel Analytics
+// --- DEFINICIÓN DE POLÍTICA DE SEGURIDAD (CSP) ---
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com https://va.vercel-scripts.com;
+  
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' 
+    https://challenges.cloudflare.com 
+    https://va.vercel-scripts.com 
+    https://www.googletagmanager.com;
+    
   style-src 'self' 'unsafe-inline';
-  img-src 'self' blob: data: https://challenges.cloudflare.com https://images.unsplash.com; 
+  
+  img-src 'self' blob: data: 
+    https://challenges.cloudflare.com 
+    https://images.unsplash.com 
+    https://www.googletagmanager.com 
+    https://www.google-analytics.com;
+    
   font-src 'self';
   object-src 'none';
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
-  frame-src https://challenges.cloudflare.com;
-  connect-src 'self' https://challenges.cloudflare.com https://vercel.live https://vitals.vercel-insights.com;
+  
+  frame-src 
+    https://challenges.cloudflare.com 
+    https://www.googletagmanager.com;
+    
+  connect-src 'self' 
+    https://challenges.cloudflare.com 
+    https://vercel.live 
+    https://vitals.vercel-insights.com 
+    https://www.googletagmanager.com 
+    https://www.google-analytics.com 
+    https://region1.google-analytics.com;
+    
   upgrade-insecure-requests;
 `;
 
