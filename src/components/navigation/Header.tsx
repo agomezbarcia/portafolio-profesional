@@ -10,11 +10,12 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '#inicio', label: 'Inicio' },
-    { href: '#habilidades', label: 'Habilidades' },
-    { href: '#experiencia', label: 'Experiencia' },
-    { href: '#educacion', label: 'Formación' },
-    { href: '#proyectos', label: 'Proyectos' },
+    { href: '/#inicio', label: 'Inicio' },
+    { href: '/#habilidades', label: 'Habilidades' },
+    { href: '/#experiencia', label: 'Experiencia' },
+    { href: '/#educacion', label: 'Formación' },
+    { href: '/#proyectos', label: 'Proyectos' },
+    { href: '/about-me', label: 'Sobre Mí' },
   ];
 
   return (
