@@ -89,17 +89,16 @@ export default function AboutPage() {
                 </div>
 
                 {/* COLUMNA DERECHA: Imagen Fija */}
-                <div className="w-full md:w-1/2 h-[50vh] md:h-auto md:min-h-screen relative order-1 md:order-2 sticky top-0">
+                <div className="w-full md:w-1/2 h-[50vh] md:h-auto md:min-h-screen relative order-1 md:order-2 md:sticky md:top-0">
                     <Image
                         src="/about.jpg"
                         alt="Abraham Gómez Barcia"
                         fill
-                        className="object-cover object-center"
+                        className="object-cover object-top"
                         priority
                     />
                     {/* Gradiente sutil para integración */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent md:bg-gradient-to-r md:from-slate-50 dark:md:from-slate-950 md:via-transparent md:to-transparent" />
-                </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent dark:from-slate-950 md:bg-gradient-to-r md:from-slate-50 dark:md:from-slate-950 md:via-transparent md:to-transparent" />                </div>
 
             </main>
 
