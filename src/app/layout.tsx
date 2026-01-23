@@ -1,13 +1,16 @@
 // src/app/layout.tsx
 
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { PrivacyProvider } from "@/providers/PrivacyProvider";
+import AnalyticsWrapper from "@/components/analytics/AnalyticsWrapper";
+import SpeedInsightsWrapper from "@/components/analytics/SpeedInsightsWrapper";
+import GTMWrapper from "@/components/analytics/GTMWrapper";
 import './globals.css';
 import { PORTFOLIO_DATA } from '@/lib/constants';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import CookieBanner from "@/components/ui/CookieBanner";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -41,30 +44,33 @@ export const metadata: Metadata = {
     ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
                                        children,
-                                   }: {
+                                   }: Readonly<{
     children: React.ReactNode;
-}) {
+}>) {
+    const nonce = (await headers()).get('x-nonce') ?? undefined;
     return (
-        <html lang="es" className="scroll-smooth" suppressHydrationWarning>
-        <head>
-            <link rel="icon" href="/favicon.ico" />
-            <meta name="theme-color" content="#3b82f6" />
-        </head>
-        <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
-                <div id="main">{children}</div>
-            </div>
+        <html lang="es" suppressHydrationWarning>
+        <body className={`${inter.className} antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300`}>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            nonce={nonce}
+        >
+            <PrivacyProvider>
+
+                {children}
+
+                <CookieBanner />
+                <AnalyticsWrapper />
+                <SpeedInsightsWrapper />
+                <GTMWrapper />
+
+            </PrivacyProvider>
         </ThemeProvider>
-
-        {/* Herramientas de Vercel */}
-        <Analytics />
-        <SpeedInsights />
-
-        {/* Google Tag Manager */}
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
         </body>
         </html>
     );

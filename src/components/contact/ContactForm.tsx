@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { sendEmail } from '@/actions/send-email';
 import { useFormStatus } from 'react-dom';
@@ -45,7 +46,7 @@ export default function ContactForm() {
         }
 
         formData.append('cf-turnstile-response', token);
-        const result = await sendEmail(null, formData);
+        const result = await sendEmail({}, formData);
 
         if (result?.error) {
             setStatus('error');
@@ -131,6 +132,21 @@ export default function ContactForm() {
                     {errorMessage}
                 </div>
             )}
+
+            {/* Checkbox de Privacidad */}
+            <div className="flex items-start gap-3 pt-2">
+                <input
+                    type="checkbox"
+                    id="privacy-policy"
+                    name="privacy-policy" // Importante para validarlo si quisieras en el server
+                    required
+                    className="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:ring-offset-slate-900"
+                />
+                <label htmlFor="privacy-policy" className="text-xs text-slate-600 dark:text-slate-400">
+                    He leído y acepto la <Link href="/legal/privacidad" className="text-blue-600 hover:underline dark:text-blue-400" target="_blank">política de privacidad</Link>.
+                    Entiendo que mis datos serán usados únicamente para responder a mi consulta.
+                </label>
+            </div>
 
             <SubmitButton />
         </form>

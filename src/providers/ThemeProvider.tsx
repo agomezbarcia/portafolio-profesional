@@ -2,10 +2,19 @@
 'use client';
 
 import * as React from 'react';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import {ThemeProvider as NextThemesProvider} from 'next-themes';
 
-type ThemeProviderProps = React.ComponentProps<typeof NextThemesProvider>;
+// Añade 'nonce' a las props aceptadas
+export function ThemeProvider({
+                                  children,
+                                  nonce,
+                                  ...props
+                              }: React.ComponentProps<typeof NextThemesProvider> & { nonce?: string }) {
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-    return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+    return (
+        // Pasa el nonce al componente de next-themes
+        <NextThemesProvider {...props} nonce={nonce}>
+            {children}
+        </NextThemesProvider>
+    );
 }

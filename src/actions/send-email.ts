@@ -3,17 +3,31 @@
 import { Resend } from 'resend';
 import { z } from 'zod';
 
-// Esquema de validación con Zod
 const contactFormSchema = z.object({
-    name: z.string().min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
-    email: z.string().email({ message: 'Por favor, introduce un email válido' }),
-    message: z.string().min(10, { message: 'El mensaje debe tener al menos 10 caracteres' }),
+    name: z.string().trim().min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
+    email: z.string().trim().email({ message: 'Por favor, introduce un email válido' }),
+    message: z.string().trim().min(10, { message: 'El mensaje debe tener al menos 10 caracteres' }),
+    // Validamos que el valor sea exactamente 'on'.
+    // Si es null, undefined o cualquier otro valor, saltará este mensaje.
+    privacyPolicy: z.literal('on', {
+        message: 'Debes aceptar la política de privacidad para continuar.'
+    }),
 });
+
+export type FormState = {
+    success?: boolean;
+    error?: string;
+    fieldErrors?: {
+        name?: string[];
+        email?: string[];
+        message?: string[];
+        privacyPolicy?: string[];
+    };
+};
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendEmail(prevState: any, formData: FormData) {
-
+export async function sendEmail(prevState: FormState, formData: FormData): Promise<FormState> {
     // Verificación de seguridad (CLOUDFARE TURNSTILE)
     const token = formData.get('cf-turnstile-response') as string;
 
@@ -22,7 +36,6 @@ export async function sendEmail(prevState: any, formData: FormData) {
     }
 
     try {
-        // Llamada a la API de Cloudflare para verificar que el token es real
         const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
             method: 'POST',
             body: JSON.stringify({
@@ -42,15 +55,14 @@ export async function sendEmail(prevState: any, formData: FormData) {
         return { error: 'Error al verificar la seguridad.' };
     }
 
-
     // Validación de datos (ZOD)
     const validatedFields = contactFormSchema.safeParse({
         name: formData.get('name'),
         email: formData.get('email'),
         message: formData.get('message'),
+        privacyPolicy: formData.get('privacy-policy'),
     });
 
-    // Si la validación falla, devolvemos los errores al frontend
     if (!validatedFields.success) {
         return {
             error: 'Datos inválidos. Revisa el formulario.',
@@ -59,15 +71,17 @@ export async function sendEmail(prevState: any, formData: FormData) {
     }
 
     const { name, email, message } = validatedFields.data;
+    const toEmail = process.env.CONTACT_EMAIL;
 
-    // Envío del email (RESEND)
+    if (!toEmail) throw new Error("Configuración de correo faltante");
+
     try {
         await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>',
-            to: 'agomezbarcia@gmail.com',
+            to: toEmail,
             subject: `Nuevo mensaje de ${name} desde el Portafolio`,
             replyTo: email,
-            text: `Nombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
+            text: `CONSENTIMIENTO LEGAL ACEPTADO\n\nNombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
         });
 
         return { success: true };
