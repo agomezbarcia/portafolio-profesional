@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'; // <--- Nos aseguramos de usar esto
 import Image from 'next/image';
 import { PORTFOLIO_DATA } from '@/lib/constants';
 import ThemeToggle from '@/components/ui/ThemeToggle';
@@ -11,7 +11,7 @@ export default function Header() {
 
     const navLinks = [
         { href: '/#inicio', label: 'Inicio' },
-        { href: '/#habilidades', label: 'Skills' },
+        { href: '/#habilidades', label: 'Habilidades' },
         { href: '/#experiencia', label: 'Experiencia' },
         { href: '/#educacion', label: 'Formación' },
         { href: '/#proyectos', label: 'Proyectos' },
@@ -34,16 +34,16 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Nav */}
-                    <div className="hidden lg:flex items-center gap-4">
+                    <div className="hidden lg:flex items-center gap-8">
                         <div className="flex gap-6">
                             {navLinks.map((link) => (
-                                <a
+                                <Link
                                     key={link.label}
                                     href={link.href}
                                     className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                 >
                                     {link.label}
-                                </a>
+                                </Link>
                             ))}
                             <a
                                 href="/CV_Abraham_Gomez_Barcia.pdf"
@@ -57,12 +57,12 @@ export default function Header() {
 
                         <div className="flex items-center gap-4 pl-4 border-l border-slate-200 dark:border-slate-700">
                             <ThemeToggle />
-                            <a
-                                href="#contacto"
+                            <Link
+                                href="/#contacto"
                                 className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-sm hover:shadow-blue-500/25"
                             >
                                 Conectar
-                            </a>
+                            </Link>
                         </div>
                     </div>
 
@@ -86,14 +86,14 @@ export default function Header() {
                     <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 py-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl animate-fade-up">
                         <div className="flex flex-col gap-2">
                             {navLinks.map((link) => (
-                                <a
+                                <Link
                                     key={link.href}
                                     href={link.href}
                                     className="px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-medium transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     {link.label}
-                                </a>
+                                </Link>
                             ))}
                             <a
                                 href="/CV_Abraham_Gomez_Barcia.pdf"
@@ -104,13 +104,13 @@ export default function Header() {
                                 Currículum
                             </a>
                             <div className="px-4 pt-2">
-                                <a
-                                    href="#contacto"
+                                <Link
+                                    href="/#contacto"
                                     className="block w-full py-2.5 bg-blue-600 text-white text-center rounded-lg font-medium hover:bg-blue-700 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     Conectar conmigo
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

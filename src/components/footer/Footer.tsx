@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { PORTFOLIO_DATA } from '@/lib/constants';
 
 export default function Footer() {
@@ -11,9 +12,9 @@ export default function Footer() {
 
           {/* Marca y Copyright */}
           <div className="space-y-2">
-          <span className="font-bold text-lg text-slate-900 dark:text-white block">
-            {PORTFOLIO_DATA.name}
-          </span>
+            <span className="font-bold text-lg text-slate-900 dark:text-white block">
+                {PORTFOLIO_DATA.name}
+            </span>
             <p className="text-slate-500 dark:text-slate-400">
               &copy; {currentYear}. Construido con Next.js & Tailwind.
             </p>
@@ -22,10 +23,19 @@ export default function Footer() {
           {/* Links Rápidos - Centrados en desktop */}
           <div className="flex flex-col md:items-center space-y-2">
             <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Navegación</h4>
-            <div className="flex gap-4 text-slate-600 dark:text-slate-400">
-              <a href="#inicio" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Inicio</a>
-              <a href="#proyectos" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Proyectos</a>
-              <a href="#contacto" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contacto</a>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-slate-600 dark:text-slate-400">
+              <Link href="/#inicio" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Inicio
+              </Link>
+              <Link href="/about-me" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Sobre Mí
+              </Link>
+              <Link href="/#proyectos" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Proyectos
+              </Link>
+              <Link href="/#contacto" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Contacto
+              </Link>
             </div>
           </div>
 
