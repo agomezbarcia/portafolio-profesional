@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { sendEmail } from '@/actions/send-email';
 import { useFormStatus } from 'react-dom';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 
 function SubmitButton() {
     const { pending } = useFormStatus();
@@ -34,6 +34,7 @@ function SubmitButton() {
 
 export default function ContactForm() {
     const ref = useRef<HTMLFormElement>(null);
+    const turnstileRef = useRef<TurnstileInstance>(null);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
     const [token, setToken] = useState<string>('');
@@ -48,14 +49,18 @@ export default function ContactForm() {
         formData.append('cf-turnstile-response', token);
         const result = await sendEmail({}, formData);
 
+        // Reset del widget tras el envío
+        if (turnstileRef.current?.reset) {
+            turnstileRef.current.reset();
+        }
+        setToken('');
+
         if (result?.error) {
             setStatus('error');
             setErrorMessage(result.error);
-            setToken('');
         } else {
             setStatus('success');
             ref.current?.reset();
-            setToken('');
         }
     }
 
@@ -121,6 +126,7 @@ export default function ContactForm() {
 
             <div className="hidden justify-center pt-2 scale-90 origin-center">
                 <Turnstile
+                    ref={turnstileRef}
                     siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
                     onSuccess={setToken}
                     options={{ theme: 'auto', language: 'es' }}
@@ -128,7 +134,7 @@ export default function ContactForm() {
             </div>
 
             {status === 'error' && (
-                <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm text-center">
+                <div role="alert" className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm text-center">
                     {errorMessage}
                 </div>
             )}

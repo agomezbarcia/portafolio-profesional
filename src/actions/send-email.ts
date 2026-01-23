@@ -75,6 +75,20 @@ export async function sendEmail(prevState: FormState, formData: FormData): Promi
 
     if (!toEmail) throw new Error("Configuración de correo faltante");
 
+    // Plantilla HTML para el correo
+    const emailHtml = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2>Nuevo contacto desde el Portafolio</h2>
+        <p><strong>De:</strong> ${name} (<a href="mailto:${email}">${email}</a>)</p>
+        <div style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; margin: 20px 0;">
+          <p style="white-space: pre-wrap;">${message}</p>
+        </div>
+        <p style="font-size: 12px; color: #888;">
+          ✅ Consentimiento legal aceptado (IP verificado vía Turnstile).
+        </p>
+      </div>
+    `;
+
     try {
         await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>',
@@ -82,6 +96,7 @@ export async function sendEmail(prevState: FormState, formData: FormData): Promi
             subject: `Nuevo mensaje de ${name} desde el Portafolio`,
             replyTo: email,
             text: `CONSENTIMIENTO LEGAL ACEPTADO\n\nNombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
+            html: emailHtml,
         });
 
         return { success: true };
