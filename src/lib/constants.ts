@@ -13,7 +13,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     tagline: 'Full Stack Developer',
     bio: 'Apasionado por crear experiencias web modernas, rápidas y accesibles. Especializado en Full Stack.',
     location: 'Sevilla, España',
-    email: 'agomezbarcia@gmail.com',
     social: {
         github: 'https://github.com/agomezbarcia',
         linkedin: 'https://linkedin.com/in/agomezbarcia'

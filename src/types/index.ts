@@ -10,7 +10,6 @@ export interface PortfolioData {
     tagline: string;
     bio: string;
     location: string;
-    email: string;
     social: SocialLinks;
 }
 
