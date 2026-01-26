@@ -14,11 +14,13 @@ import CookieBanner from "@/components/ui/CookieBanner";
 
 const inter = Inter({ subsets: ['latin'] });
 
-// Define tu URL base real aquí para evitar errores de metadata
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://agomezbarcia.vercel.app/';
 
 export const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
+    verification: {
+        google: 'S5GUG6zVK7PJchnOfdcZTUmdafUIMOmEPQR4-BwsL3Q',
+    },
     title: {
         default: PORTFOLIO_DATA.name + ' | Desarrollador Full Stack',
         template: '%s | Mi Portafolio',
