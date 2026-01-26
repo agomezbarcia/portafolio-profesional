@@ -1,14 +1,114 @@
 @import "tailwindcss";
-@config "../../tailwind.config.ts";
+@plugin "@tailwindcss/typography";
 
+/* CONFIGURACIÓN ADAPTADA A TAILWIND V4 */
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* --- COLORES PERSONALIZADOS --- */
+  --color-primary: rgb(59 130 246);
+  --color-secondary: rgb(139 92 246);
+  --color-accent: rgb(249 115 22);
+
+  /* --- FUENTES PERSONALIZADOS --- */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  /* --- BREAKPOINTS --- */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* --- ESPACIADO --- */
+  --spacing-safe-top: max(1rem, env(safe-area-inset-top));
+  --spacing-safe-bottom: max(1rem, env(safe-area-inset-bottom));
+  --spacing-safe-left: max(1rem, env(safe-area-inset-left));
+  --spacing-safe-right: max(1rem, env(safe-area-inset-right));
+
+  /* --- BORDES --- */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* --- SOMBRAS --- */
+  --shadow-glow-blue: 0 0 20px rgba(59, 130, 246, 0.5);
+  --shadow-glow-purple: 0 0 20px rgba(139, 92, 246, 0.5);
+
+  /* --- BACKDROP BLUR --- */
+  --backdrop-blur-xs: 2px;
+  --backdrop-blur-sm: 4px;
+  --backdrop-blur-md: 8px;
+  --backdrop-blur-lg: 16px;
+  --backdrop-blur-xl: 24px;
+
+  /* --- GRADIENTES DE FONDO --- */
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+
+  /* --- ANIMACIONES Y TRANSICIONES --- */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-fade-up: fadeUp 0.5s ease-out forwards;
+  --animate-slide-in-left: slideInLeft 0.5s ease-out;
+  --animate-slide-in-right: slideInRight 0.5s ease-out;
+  --animate-bounce-slow: bounce 3s infinite;
+  --animate-gradient-shift: gradientShift 3s ease infinite;
+  --animate-float: float 3s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+    50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+  }
+}
+
+/* --- ESTILOS BASE --- */
 @layer base {
+  :root {
+    --tw-gradient-stops: transparent, transparent;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
   html {
     scroll-padding-top: 5rem;
     scroll-behavior: smooth;
   }
 
   body {
-    @apply text-slate-900 bg-slate-50 dark:bg-slate-950 antialiased selection:bg-blue-600 selection:text-white;
+    @apply text-slate-900 bg-slate-50 dark:bg-slate-950 antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight; }
@@ -29,16 +129,9 @@
   .glass-card {
     @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800;
   }
-
-  .animate-fade-up { animation: fadeUp 0.5s ease-out forwards; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 }
 
-/* --- VIEW TRANSITIONS (GLOBAL) --- */
+/* --- VIEW TRANSITIONS API --- */
 @keyframes wipe-down {
   0% { clip-path: inset(0 0 100% 0); }
   100% { clip-path: inset(0 0 0 0); }
@@ -51,13 +144,11 @@
   mix-blend-mode: normal;
 }
 
-/* La pantalla vieja se queda quieta detrás */
 ::view-transition-old(root) {
   animation: none;
   z-index: 1;
 }
 
-/* La pantalla nueva baja como cortina por delante */
 ::view-transition-new(root) {
   z-index: 9999;
   animation-name: wipe-down;
