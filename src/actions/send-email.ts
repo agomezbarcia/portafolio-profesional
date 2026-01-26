@@ -71,7 +71,7 @@ export async function sendEmail(prevState: FormState, formData: FormData): Promi
     }
 
     const { name, email, message } = validatedFields.data;
-    const toEmail = process.env.CONTACT_EMAIL;
+    const toEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
 
     if (!toEmail) throw new Error("Configuración de correo faltante");
 
