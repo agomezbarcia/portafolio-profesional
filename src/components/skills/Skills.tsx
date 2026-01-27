@@ -7,9 +7,12 @@ export default function Skills() {
       <section id="habilidades" className="py-16 px-4 bg-white dark:bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Stack Tecnológico
-            </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 dark:text-white mb-12">
+                  Stack{' '}
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+             Tecnológico
+          </span>
+              </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
               Herramientas que utilizo para construir productos digitales.
             </p>

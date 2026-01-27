@@ -8,19 +8,19 @@ export default function Projects() {
     return (
         <section id="proyectos" className="py-16 px-4 bg-white dark:bg-slate-950">
             <div className="max-w-6xl mx-auto">
-                <div className="mb-12 text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-4">
-                    <div>
-            <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-wider uppercase mb-2 block">
-              Portafolio
-            </span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-                            Proyectos{' '}
-                            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Destacados
-              </span>
-                        </h2>
-                    </div>
-                    <a href={PORTFOLIO_DATA.social.github} target="_blank" className="text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors">
+                <div className="text-center mb-12">
+                    <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-wider uppercase mb-2 block">
+                        Portafolio
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                        Proyectos{' '}
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            Destacados
+                        </span>
+                    </h2>
+
+                    <a href={PORTFOLIO_DATA.social.github} target="_blank"
+                        className="inline-block text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors">
                         Ver todo en GitHub &rarr;
                     </a>
                 </div>
